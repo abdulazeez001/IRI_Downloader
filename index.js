@@ -9,6 +9,7 @@ const path = require('path');
 const app = express()
 app.use(cors())
 app.use(express.static('public'))
+let port = process.env.PORT || 4000;
 app.get('/',(req,res)=>{
     res.render('index.html')
 })
@@ -73,4 +74,4 @@ app.get('/download',async (req,res)=>{
     
 })
 
-app.listen(4000,()=>{console.log('on 4000')})
+app.listen(port,()=>{console.log(`Running on port ${port}`)})
