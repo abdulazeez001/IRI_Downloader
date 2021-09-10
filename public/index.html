@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONEL,ORG</title>
+</head>
+<style>
+    input:focus{
+        border: 2px solid #0e176c !important;
+    }
+    a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<body style="background-color: black;">
+    
+    <div style="width:350px;margin:80px auto;text-align: center;padding:20px 40px;font-family: 'Gill Sans', 'Gill Sans MT', sans-serif;background-color: #f4f4f4;">
+        <div style="margin-bottom:30px;font-size:30px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">SONEL.ORG</div>
+        <input id="location" type="text" placeholder="Enter your location code" name="nof" style="width:200px;margin-bottom:10px;height:30px;font-weight: bolder;background-color: #fafafa;border-color:black;outline: none;padding:5px 10px;"/><br/>
+        <p style="margin: -5px 0; font-size: 10px; font-style: italic;">Input your location code</p><br />
+        <input id="lat" type="text" placeholder="Enter your latitude" name="lat" style="width:200px;margin-bottom:10px;height:30px;font-weight: bolder;background-color: #fafafa;border-color:black;outline: none;padding:5px 10px;"/><br/>
+        <p style="margin: -5px 0; font-size: 10px; font-style: italic;">Input your geomagnetic latitude</p><br />
+        <input id="long" type="text" placeholder="Enter you longitude " name="long" style="width:200px;margin-bottom:10px;height:30px;font-weight: bolder;background-color: #fafafa;border-color:black;outline: none;padding:5px 10px;"/><br/>
+        <p style="margin: -5px 0; font-size: 10px; font-style: italic;">Input your geomagnetic longitude</p><br />
+        <input id="year" type="number" placeholder="Enter the year" name="year" style="width:200px;margin-bottom:10px;height:30px;font-weight: bolder;background-color: #fafafa;border-color:black;outline: none;padding:5px 10px;"/><br/>
+        <p style="margin: -5px 0; font-size: 10px; font-style: italic;">Input year of interest</p><br />
+        <button onclick="yo()"style="width:220px;height:30px;border:none;font-weight:700;background-color:#0e176c;color:white;margin: 10px 0;box-shadow:2px 2px 5px #bcbcbc;cursor: pointer;">Download</button><br/>
+        <a style="margin: -5px 0; font-size: 10px; font-style: italic;color:red;" href="mailto:oluwatobiabdulazeez@gmail.com">Made with love by Shittu Abdulazeez </a>
+    </div>
+</body>
+<script>
+let locat = document.getElementById("location")
+let year = document.getElementById("year")
+let lat = document.getElementById("lat")
+let long = document.getElementById("long")
+let endday;
+// let startday = document.getElementById("startday")
+// let endday = document.getElementById("endday")
+const MONTHS = {
+  'jan':1,
+  'feb':2,
+  'mar':3,
+  'apr':4,
+  'may':5,
+  'jun':6,
+  'jul':7,
+  'aug':8,
+  'sept':9,
+  'oct':10,
+  'nov':11,
+  'dec':12
+}
+const {jan,feb,mar,apr,may,jun,jul,aug,sept,oct,nov,dec} = MONTHS
+const thirtyDays = [sept,apr,jun,nov]
+const thirtyOneDays = [jan,mar,may,jul,aug,oct,dec]
+function yo(){
+    if(locat.value == '' || year.value == ''){
+        alert('PLEASE FILL ALL THE INPUT FIELD')
+        return
+    }
+    let newLoc = locat.value.toLowerCase()
+    var urls =[]
+    Array(newLoc).forEach((num)=>{
+    [year.value].forEach((year)=>{
+      for (let month = 1;month<=5;month++){
+        if (thirtyDays.indexOf(month) >= 0){
+          endday = 3
+        }
+        else if(thirtyOneDays.indexOf(month) >= 0){
+          endday = 3
+        }
+        else{
+          endday = parseInt(year.value) % 4==0 ? 10:10
+        }
+        for (var i = 1; i<=endday; i++){
+            
+            // let end = year.slice(2)
+            urls.push(`/download?nof=${num}&day=${i}&year=${year}&month=${month}&lat=${lat.value}&long=${long.value}`)
+        }
+      }
+      
+    })
+    }
+)
+   
+    var interval = setInterval(download,0,urls)
+   function download(urls){
+        var url = urls.pop();
+
+        var a = document.createElement("a");
+        a.setAttribute('href',url);
+        a.setAttribute('dowload','');
+        a.setAttribute('target','_blank');
+        a.click();
+
+        if(urls.length == 0){
+            clearInterval(interval)
+        }
+    }
+    }
+
+</script>
+</html>
