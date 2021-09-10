@@ -1,6 +1,5 @@
 var axios = require('axios');
 var express = require('express')
-var qs = require('qs');
 var cors = require('cors')
 var que = require('query-string')
 const fs = require('fs');
@@ -60,9 +59,7 @@ app.get('/download',async (req,res)=>{
         
       }catch(err){
           console.log(err)
-      }
-      
-        
+      }        
     })
     .catch(function (error) {
       console.log(error);
